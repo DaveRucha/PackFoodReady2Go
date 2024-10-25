@@ -1,0 +1,112 @@
+﻿@model PackFoodReady2Go.Core.ContactUs
+
+@* @model PackFoodReady2Go.Core.Customer
+ *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <style>
+
+        input {
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #45a049;
+            }
+
+        .text-danger {
+            color: red;
+        }
+
+        .main {
+            display: flex;
+        }
+
+        .inner {
+            width: 600px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <hr/>
+    <form asp-action="Register" method="post" style="margin-left:23%; background-color: #f4f4f4;
+            border-radius: 8px;
+            padding:50px;
+margin-top:30px;
+margin-bottom:30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            box-sizing:600px;
+        }">
+
+        <h2 style="  text-align: center;
+            color: #333;">
+            Contact us
+        </h2> 
+        <div class="main">
+            <div class="inner">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label asp-for="CustomerName" style="display: block;
+            margin-bottom: 8px;
+            color: #333;"></label>
+                    <input asp-for="CustomerName" class="form-control" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label asp-for="Email" style="display: block;
+            margin-bottom: 8px;
+            color: #333;"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label asp-for="CSubject" style="display: block;
+            margin-bottom: 8px;
+            color: #333;"></label>
+                    <input asp-for="CSubject" class="form-control" />
+                    <span asp-validation-for="CSubject" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label asp-for="CMessage" style="display: block;
+            margin-bottom: 8px;
+            color: #333;"></label>
+                    <input asp-for="CMessage" type="password" class="form-control" />
+                    <span asp-validation-for="CMessage" class="text-danger"></span>
+                </div>
+               
+            </div>
+        </div>
+
+        <div>
+            <label asp-for="ButtonText" ></label>
+        <input asp-for="ButtonText" type="submit" class="btn btn-primary">Submit
+        </div>
+
+    </form>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

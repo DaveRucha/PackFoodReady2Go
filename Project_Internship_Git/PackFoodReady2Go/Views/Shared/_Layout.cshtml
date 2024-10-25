@@ -1,0 +1,293 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    var userEmail = Context.Session.GetString("UserEmail");
+    var userName = Context.Session.GetString("UserName");
+    var userId = Context.Session.GetInt32("UserId");
+    var WebsiteTitle = Context.Session.GetString("WebsiteTitle");
+    var CompanyAddress = Context.Session.GetString("CompanyAddress");
+    var CompanyContactNo = Context.Session.GetInt32("CompanyContactNo");
+    var CompanyEmail = Context.Session.GetString("CompanyEmail");
+    var DescriptionOffer = Context.Session.GetString("DescriptionOffer");
+    var CompanyDescription = Context.Session.GetString("CompanyDescription");
+    var cartTotal = Context.Session.GetInt32("cartTotal");
+    var total = Context.Session.GetString("total");
+    var discount = Context.Session.GetString("discount");
+    var subtotal = Context.Session.GetString("subtotal");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]- foodpack</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!--<link rel="stylesheet" href="~/PackFoodReady2Go.styles.css" asp-append-version="true" />-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <link href="~/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/animate.css">
+
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/css/aos.css">
+
+    <link rel="stylesheet" href="~/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/icomoon.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
+
+</head>
+<body>
+    <div>
+    <div class="py-1 bg-primary">
+        <div class="container">
+            <div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
+                <div class="col-lg-12 d-block">
+                    <div class="row d-flex">
+                        <div class="col-md pr-4 d-flex topper align-items-center">
+                            <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+                            <!--Contact No-->
+                            <span class="text">@CompanyContactNo</span>
+                        </div>
+                        <div class="col-md pr-4 d-flex topper align-items-center">
+                            <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane">@CompanyEmail</span></div>
+                            <!--Email-->
+                        </div>
+                        <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
+                            <!--TagLine-->
+                            <span class="text">@DescriptionOffer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" asp-action="Index" asp-area="" asp-controller="Customer">@WebsiteTitle</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item active">
+                        <a asp-action="Index" asp-area="" asp-controller="Customer" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" asp-action="Shop" asp-area="" asp-controller="Product">Shop</a>
+
+
+                            @if (!string.IsNullOrEmpty(userEmail))
+                            {
+                                <a href="/Product/ShowWishlist?userId=@userId" class="dropdown-item">Wishlist</a>
+
+
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link">Wishlist</a>
+                            }
+
+
+                            @if (!string.IsNullOrEmpty(userEmail))
+                            {
+                                <a href="/Product/ShowCart?userId=@userId" class="dropdown-item">Cart</a>
+
+
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link">Cart</a>
+                            }
+
+
+                            @if (!string.IsNullOrEmpty(userEmail))
+                            {
+
+                                <a asp-action="CompareProducts" asp-area="" asp-controller="Product" class="dropdown-item">Compare Product</a>
+
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link">Compare Product</a>
+                            }
+
+
+                            @if (!string.IsNullOrEmpty(userEmail))
+                            {
+
+                                <a class="dropdown-item" href="/Product/Checkout?subtotal=@subtotal&discount=@discount&total=@total">Checkout</a>
+
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link">Checkout</a>
+                            }
+
+                            @if (!string.IsNullOrEmpty(userEmail))
+                            {
+
+                                <a class="dropdown-item" href="/Product/OrderHistory?userId=@userId">Order History</a>
+
+                            }
+                            else
+                            {
+                                <a class="dropdown-item" asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link">Order History</a>
+                            }
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="AboutUs" asp-area="" asp-controller="Customer" class="nav-link">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-action="ContactUs" asp-area="" asp-controller="Customer" class="nav-link">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                        @if (!string.IsNullOrEmpty(userEmail))
+                        {
+                            <a class="nav-link" asp-action="Logout" asp-area="" asp-controller="Customer">Logout</a>
+
+                        }
+                        else
+                        {
+                            <a asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link">Login/Register</a>
+                        }
+                    </li>
+
+
+                    @if (!string.IsNullOrEmpty(userEmail))
+                    {
+                        <li class="nav-item cta cta-colored">
+                            <a href="/Product/ShowCart?userId=@userId" class="nav-link"><span class="icon-shopping_cart"></span>[@cartTotal]</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item cta cta-colored">
+                            <a asp-action="Login" asp-area="" asp-controller="Customer" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a>
+                        </li>
+                    }
+                    <form class="d-flex" role="search" asp-controller="Product" asp-action="Index" method="get">
+                        <input class="form-control " style="margin:10px; width:200px; padding:5px 10px"
+                               type="text" placeholder="Search" aria-label="Search" name="searchText">
+                        <button class="btn btn-outline-success" style="margin:10px;  width:100px; height:50px; "
+                                type="submit">
+                            Search
+                        </button>
+                    </form>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+
+
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- footer -->
+
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="mouse">
+                    <a href="#" class="mouse-icon">
+                        <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                    </a>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">@WebsiteTitle</h2>
+                        <p>@CompanyDescription</p>
+                        @*  <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul> *@
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Menu</h2>
+                        <ul class="list-unstyled">
+                            <li><a asp-action="Shop" asp-controller="Product" class="py-2 d-block">Shop</a></li>
+                            <li><a asp-action="AboutUs" asp-controller="Customer" class="py-2 d-block">About</a></li>
+                            <li><a asp-action="ContactUs" asp-controller="Customer" class="py-2 d-block">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Help</h2>
+                        <div class="d-flex">
+                            <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                                <li><a asp-action="DeliveryReturn" asp-area="" asp-controller="Customer" class="py-2 d-block">Returns &amp; Exchange</a></li>
+                                <li><a asp-action="TermsConditions" asp-area="" asp-controller="Customer" class="py-2 d-block">Terms &amp; Conditions</a></li>
+                                <li><a asp-action="Footer" asp-area="" asp-controller="Customer" class="py-2 d-block">Privacy Policy</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text"> @CompanyAddress</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text"> @CompanyContactNo</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text"> @CompanyEmail</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <p>
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="icon-heart color-danger" aria-hidden="true"></i> <a href="https://colorlib.com" target="_blank"></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

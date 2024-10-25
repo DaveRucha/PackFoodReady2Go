@@ -1,0 +1,4 @@
+ECHO is on.
+# Ignore build outputs
+bin/
+obj/

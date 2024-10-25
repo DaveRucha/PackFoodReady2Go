@@ -1,0 +1,663 @@
+﻿@* @model IEnumerable<PackFoodReady2Go.Core.Products> *@
+    @model PackFoodReady2Go.Core.ProductReviewViewModel
+@{
+    var singleproduct = ViewData["Product"] as PackFoodReady2Go.Core.Products;
+    
+}
+
+@using Microsoft.AspNetCore.Http
+@using Microsoft.IdentityModel.Tokens
+
+@{
+    var UserId = Context.Session.GetInt32("UserId");
+
+    var userEmail = Context.Session.GetString("UserEmail");
+    var ReviewFail = Context.Session.GetString("ReviewFail");
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-o4oSYTcJKd5X+fM/6spQSkXM6pNk2FGdwwqqxxIy5dznQYE5eLvHlRgFDT4h9U5z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/css/aos.css">
+
+    <link rel="stylesheet" href="~/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/icomoon.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+    <!-- Include medium-zoom library -->
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script>
+
+    <style>
+    .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        font-size: 25px;
+        color: #82ae46;
+    }
+
+    .rating span {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+    }
+
+        .alert {
+            padding: 20px;
+            background-color: #ffe69c;
+            border-radius:20px;
+            color: #04424f;
+            position:fixed;
+            top: 5%;
+            left: 30%;
+            width: 40%;
+            align-self:center;
+            text-align: center;
+            z-index: 1000;
+            display: none; /* Hide initially */
+        }
+
+        .zoom {
+            padding: 10px;
+            background-color:transparent;
+            transition: transform .2s; /* Animation */
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(1.9); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
+        .slideshow-items {
+            width: 500px;
+        }
+
+        .slideshow-thumbnails {
+            width: 100px;
+        }
+
+        #slideshow-items-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        #lens {
+            background-color: rgba( 233, 233, 233, 0.4 )
+        }
+
+        #lens, #result {
+            position: absolute;
+            display: none;
+            z-index: 1;
+        }
+
+        .slideshow-items {
+            display: none;
+        }
+
+            .slideshow-items.active {
+                display: block;
+            }
+
+        .slideshow-thumbnails {
+            opacity: 0.5;
+        }
+
+            .slideshow-thumbnails.active {
+                opacity: 1;
+            }
+
+        #lens, .slideshow-items, .slideshow-thumbnails, #result {
+            border: solid var(--light-grey-2) 1px;
+        }
+
+
+    </style>
+</head>
+<body class="goto-here">
+
+    <div class="hero-wrap hero-bread" style="background-image: url('@Url.Content("~/img/" + @ViewData["BgImage"])');">
+
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a asp-action="Index" asp-area="" asp-controller="Customer" style="font-size:15px;color:white;font-weight:700; text-shadow: 0 0 3px #0d491b, 0 0 5px #000000;">Home</a></span> / <span style="font-size:15px;color:white;font-weight:700; text-shadow: 0 0 3px #0d491b, 0 0 5px #000000;">Single Product </span></p>
+                    <h1 class="mb-0 bread" style="color:white;font-weight:700; text-shadow: 0 0 3px #0d491b, 0 0 5px #000000;font-size:28px">Single Product</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="ftco mt-5" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 ftco-animate ">
+                   
+                    
+ 
+                <div id='lens'></div>
+
+                <div id='slideshow-items-container'>
+
+                    <img class='slideshow-items active' src='~/img/@singleproduct.ImageURL'>
+                    
+                </div>
+
+                <div id='result'></div>
+
+                <div class='row'>
+                    <img class='slideshow-thumbnails active' src=''>
+                </div>
+
+
+                </div>
+                <div class="col-lg-6 product-details pl-md-5 ftco-animate" id="div_prod">
+                    <h3>@singleproduct.ProductName</h3>
+                    
+                    <p class="price">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z" />
+                            </svg>@singleproduct.UnitPrice
+                        </span>
+                    </p>
+                    <p>
+                        @singleproduct.Description
+                    </p>
+                    <div class="row mt-4">
+                        
+                        <div class="w-100"></div>
+                        @if (@singleproduct.Size != null)
+                        {
+                            <div class="col-md-12">
+                                <p style="color: #000;">Size : @singleproduct.Size</p>
+                            </div>
+                        }
+                        @if (@singleproduct.Capacity != null)
+                        {
+                            <div class="col-md-12">
+                                <p style="color: #000;">Capacity : @singleproduct.Capacity</p>
+                            </div>
+                        }
+                        @if (@singleproduct.Material != null)
+                        {
+                            <div class="col-md-12">
+                                <p style="color: #000;">Material : @singleproduct.Material</p>
+                            </div>
+                        }
+                        @if (@singleproduct.Discount != null)
+                        {
+                            <div class="col-md-12">
+                                <p style="color: #000;">
+                                    Discount : @singleproduct.Discount %
+                                    
+                                </p>
+                            </div>
+                        }
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(userEmail))
+                    {
+                        <div class="w-100"></div>
+                        <form action="/Product/AddInCart" method="GET">
+                            <input type="hidden" name="Customer_id" value="@UserId">
+                            <input type="hidden" name="Product_id" value="@singleproduct.ProductID">
+
+                            <div class="input-group col-md-6 d-flex mb-3">
+                                <span class="input-group-btn mr-2">
+                                    <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                        <i class="ion-ios-remove"></i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                <span class="input-group-btn ml-2">
+                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                        <i class="ion-ios-add"></i>
+                                    </button>
+                                </span>
+                            </div>
+
+                            <button type="submit">Add To Cart</button>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-action="Login" asp-area="" asp-controller="Customer" class="btn btn-black py-3 px-5">
+                            Add to Cart
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="" style="margin-top:0px">
+        <div class="container">
+            <div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <span class="subheading">Products</span>
+                    <h2 class="mb-4">Related Products</h2>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                @foreach (var product in @Model.RelatedProducts.ToList())
+                {
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="product">
+                            <a href="#" class="img-prod">
+                                <img class="img-fluid" src="~/img/@product.ImageURL" alt="Product Image">
+                                <div class="overlay"></div>
+                            </a>
+                            <div class="text py-3 pb-4 px-3 text-center">
+                                <h3><a href="#">@product.ProductName</a></h3>
+                                <div class="d-flex">
+                                    <div class="pricing">
+                                        <p class="price"><span>@product.UnitPrice </span></p>
+                                    </div>
+                                </div>
+                                <div class="bottom-area d-flex px-3">
+                                    <div class="m-auto d-flex">
+
+                                        <a href="/Product/ProductView?Product_id=@product.ProductID&CategoryID=@product.CategoryID" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                            <span><i class="ion-ios-menu"></i></span>
+                                        </a>
+
+                                        @if (!string.IsNullOrEmpty(userEmail))
+                                        {
+                                            <a href="/Product/AddInCart?Customer_id=@UserId&Product_id=@product.ProductID&Quantity=1" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Login" asp-area="" asp-controller="Customer" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </a>
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(userEmail))
+                                        {
+                                            <a href="/Product/AddInWishlist?Customer_id=@UserId&Product_id=@product.ProductID" class="heart d-flex justify-content-center align-items-center ">
+                                                <span><i class="ion-ios-heart"></i></span>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Login" asp-area="" asp-controller="Customer" class="heart d-flex justify-content-center align-items-center ">
+                                                <span><i class="ion-ios-heart"></i></span>
+                                            </a>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+      
+    </section>
+
+
+    <div class="container mt-4">
+
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+
+                <h2 class="mb-4">Customer Reviews</h2>
+
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-5 heading-section text-center ftco-animate">
+
+                <div class="mt-4">
+                    <h5>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="rating">@(Model.AverageRating >= i ? "★" : "☆")</span>
+                        }
+
+                    </h5>
+                    <h5>@Model.AverageRating Out Of 5<br />Based on @Model.Reviews.Count() Reviews</h5>
+
+                </div>
+            </div>
+
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <table class="w-100">
+                    @{
+                        int one = 0, two = 0, three = 0, four = 0, five = 0;
+                    }
+                    @foreach (var reviews in Model.Reviews)
+                    {
+                        if (reviews.Rating.Equals(1))
+                        {
+                            one++;
+                        }
+                        else if (reviews.Rating.Equals(2))
+                        {
+                            two++;
+                        }
+                        else if (reviews.Rating.Equals(3))
+                        {
+                            three++;
+                        }
+                        else if (reviews.Rating.Equals(4))
+                        {
+                            four++;
+                        }
+                        else if (reviews.Rating.Equals(5))
+                        {
+                            five++;
+                        }
+                    }
+
+                    <tr>
+                        <td style="width:25%"><span class="rating">★★★★★</span></td>
+                        <td style="width:60%">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @(five*20)%;" aria-valuenow="@five" aria-valuemin="0" aria-valuemax="@Model.Reviews.Count()">
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width:15%">@five</td>
+                    </tr>
+                    <tr>
+                        <td><span class="rating">★★★★☆</span></td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @(four*20)%;" aria-valuenow="@four" aria-valuemin="0" aria-valuemax="@Model.Reviews.Count()">
+                                </div>
+                            </div>
+                        </td>
+                        <td>@four</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="rating">★★★☆☆</span></td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @(three*20)%;" aria-valuenow="@three" aria-valuemin="0" aria-valuemax="@Model.Reviews.Count()">
+                                </div>
+                            </div>
+                        </td>
+                        <td>@three</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="rating">★★☆☆☆</span></td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @(two*20)%;" aria-valuenow="@two" aria-valuemin="0" aria-valuemax="@Model.Reviews.Count()">
+                                </div>
+                            </div>
+                        </td>
+                        <td>@two</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="rating">★☆☆☆☆</span></td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: @(one*20)%;" aria-valuenow="@one" aria-valuemin="0" aria-valuemax="@Model.Reviews.Count()">
+                                </div>
+                            </div>
+                        </td>
+                        <td>@one</td>
+                    </tr>
+                </table>
+
+            </div>
+            <br />
+            <hr style="margin-top:20px;margin-bottom:20px;" />
+            <br />
+            <span class="subheading" style="font-size:30px;font-family:  Lora, Georgia, serif;font-style: italic; color:black;">User Reviews</span>
+
+
+            @foreach (var reviews in Model.Reviews)
+            {
+                <div class="card mt-3">
+                    <div class="card-header text-dark">
+                        <strong>@reviews.CustomerName</strong>
+                        <span class="rating float-lg-right">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <span>@(reviews.Rating >= i ? "★" : "☆")</span>
+                            }
+
+                        </span>
+                        <span style="margin-left:20px">@reviews.ReviewDate.ToShortDateString()</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@reviews.ReviewTitle</h5>
+                        <p class="card-text">@reviews.ReviewDescription</p>
+                    </div>
+                </div>
+            }
+
+            <button type="button" class="btn btn-primary" style="margin:20px" data-toggle="modal" data-target="#reviewModal">Write a Review</button>
+        </div>
+    </div>
+    
+        @if (ReviewFail.Equals("true"))
+        {
+        <div class="alert" id="myAlert">
+            Your Review is already added.
+        </div>
+        }
+    
+    <!-- Review Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Write a Review</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Review Form -->
+                    <form asp-action="WriteReviews" asp-controller="Product"  method="post">
+                        <input type="hidden" name="ProductID" value="@Model.Products.ProductID" />
+                        
+                        <div class="form-group">
+                            <label for="rating">Rating:</label>
+                            <input type="number" class="form-control" id="rating" name="Rating" min="1" max="5" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewTitle">Review Title:</label>
+                            <input type="text" class="form-control" id="reviewTitle" name="ReviewTitle" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewDescription">Review Description:</label>
+                            <textarea class="form-control" id="reviewDescription" name="ReviewDescription" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewDescription">Name:</label>
+                            <input type="text" class="form-control" id="CustomerName" name="CustomerName" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewDescription">Email:</label>
+                            <input type="text" class="form-control" id="CustomerEmail" name="CustomerEmail" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.easing.1.3.js"></script>
+    <script src="~/js/jquery.waypoints.min.js"></script>
+    <script src="~/js/jquery.stellar.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/jquery.animateNumber.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <script src="~/js/scrollax.min.js"></script>
+    <script src="~/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/js/google-map.js"></script>
+    <script src="~/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.slideshow-thumbnails').hover(function () { changeSlide($(this)); });
+
+            $(document).mousemove(function (e) {
+                var img = $('.slideshow-items.active');
+                var imgOffset = img.offset();
+                var imgWidth = img.outerWidth();
+                var imgHeight = img.outerHeight();
+
+                var x = e.pageX - imgOffset.left;
+                var y = e.pageY - imgOffset.top;
+
+                if (x > 0 && x < imgWidth && y > 0 && y < imgHeight) {
+                    $('#lens').show();
+                    $('#result').show();
+                    imageZoom(img, $('#result'), $('#lens'), x, y);
+                    $('#div_prod').hide();
+                } else {
+                    $('#lens').hide();
+                    $('#result').hide();
+                    $('#div_prod').show();
+                }
+
+            });
+
+        });
+
+
+        function imageZoom(img, result, lens, x, y) {
+            var cx = img.innerWidth() / lens.innerWidth();
+            var cy = img.innerHeight() / lens.innerHeight();
+
+            result.width(img.innerWidth()).height(img.innerHeight());
+            lens.width(img.innerWidth() / 2).height(img.innerHeight() / 2);
+
+            result.offset({ top: img.offset().top, left: img.offset().left + img.outerWidth() + 10 });
+
+            result.css('backgroundImage', 'url(' + img.attr('src') + ')');
+            result.css('backgroundSize', img.width() * cx + 'px ' + img.height() * cy + 'px');
+
+            moveLens(x, y);
+
+            lens.mousemove(function (e) { moveLens(e.clientX - img.offset().left, e.clientY - img.offset().top); });
+            img.mousemove(function (e) { moveLens(e.clientX - img.offset().left, e.clientY - img.offset().top); });
+            lens.on('touchmove', function (e) { moveLens(e.originalEvent.touches[0].clientX - img.offset().left, e.originalEvent.touches[0].clientY - img.offset().top); });
+            img.on('touchmove', function (e) { moveLens(e.originalEvent.touches[0].clientX - img.offset().left, e.originalEvent.touches[0].clientY - img.offset().top); });
+
+            function moveLens(x, y) {
+                var lensX = x - lens.outerWidth() / 2;
+                var lensY = y - lens.outerHeight() / 2;
+
+                if (lensX < 0) lensX = 0;
+                if (lensX > img.outerWidth() - lens.outerWidth()) lensX = img.outerWidth() - lens.outerWidth();
+                if (lensY < 0) lensY = 0;
+                if (lensY > img.outerHeight() - lens.outerHeight()) lensY = img.outerHeight() - lens.outerHeight();
+
+                lens.offset({ top: lensY + img.offset().top, left: lensX + img.offset().left });
+                result.css('backgroundPosition', '-' + (lensX * cx) + 'px -' + (lensY * cy) + 'px');
+            }
+        }
+
+        function changeSlide(elm) {
+            $('.slideshow-items').removeClass('active');
+            $('.slideshow-items').eq(elm.index()).addClass('active');
+            $('.slideshow-thumbnails').removeClass('active');
+            $('.slideshow-thumbnails').eq(elm.index()).addClass('active');
+        }
+
+        $(document).ready(function () {
+
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
+
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
+
+                // If is not undefined
+
+                $('#quantity').val(quantity + 1);
+
+
+                // Increment
+
+            });
+
+            $('.quantity-left-minus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
+
+                // If is not undefined
+
+                // Increment
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+
+        });
+        document.getElementById('myAlert').style.display = 'block';
+
+        // Hide the alert after 5 seconds
+        setTimeout(function () {
+            document.getElementById('myAlert').style.display = 'none';
+        }, 3000);
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyYq0T8H1JCD8pk6vB2jXooAfQtk8E64uk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-cb5DebBX4lY1uyaTkfF2vfnVAr2TAoVxvdzT3N1CqNOQp0qUa9TDBHqNpLc+4j8" crossorigin="anonymous"></script>
+</body>
+</html>

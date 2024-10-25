@@ -1,0 +1,143 @@
+.jdgm-widget.jdgm-widget {
+    display: block;
+}
+.jdgm-widget.jdgm-widget {
+    display: block;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+body, input, textarea, button, select {
+    font-size: var(--g-font-size);
+    font-family: var(--g-font-2);
+    color: #222;
+    line-height: 1.8;
+    font-weight: var(--g-font-weight-body);
+}
+body, input, textarea, button, select {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+}
+:root {
+    --footer-bg: #262613;
+    --footer-bg-bot: #262613;
+    --footer-text: #fafafa;
+    --footer-title: #ffffff;
+    --footer-text-hover: #ffffff;
+}
+:root {
+    --sticky-cart-mix: #262626;
+    --sticky-cart-mix2: #c0c0c0;
+    --sticky-cart-text: #ffffff;
+    --sticky-cart-bg: #c99a5c;
+    --sticky-cart-cl: #ffffff;
+}
+:root {
+    --header-background: #ffffff;
+    --header-background-top: #f8ede7;
+    --header-text: #333333;
+    --header-linkcolor: #222222;
+    --header-linkhover: #c3935b;
+    --header-menucolor: #222222;
+    --header-menuhover: #c3935b;
+    --header-menudroptexttitle: #222222;
+    --header-menudroptext: #222222;
+    --header-menudropbg: #ffffff;
+    --header-topbarbg: ;
+    --header-text-top: #262613;
+}
+:root {
+    --jdgm-primary-color: #b7813b;
+    --jdgm-secondary-color: #edf5f5;
+    --jdgm-star-color: #b7813b;
+    --jdgm-paginate-color: #b7813b;
+    --jdgm-border-radius: 0;
+}
+:root {
+    --g-font-1: Josefin Sans;
+    --g-font-2: Josefin Sans;
+    --g-font-3: Poppins;
+    --g-font-size: 16px;
+    --g-main: #754425;
+    --g-main-2: #754425;
+    --g-color-heading: #222222;
+    --g-cta-button: #754425;
+    --g-container: 1300px;
+    --g-gutter: 40px;
+    --g-hgutter: 20px;
+    --g-label-text: #fff;
+    --g-label-new: #ff7143;
+    --g-label-hot: #eb4d55;
+    --g-label-sale: #eb4d55;
+    --g-label-other: #50d890;
+    --g-alert: #000000;
+    --g-alert-bg: #d6e4ff;
+    --g-alert-bd: #d6e4ff;
+    --g-font-weight-body: 400;
+    --g-font-color-subtop: #030303;
+    --g-font-size-subtop: 16px;
+    --g-font-weight-subtop: 600;
+    --g-font-spacing-subtop: 0.3em;
+    --g-radius-label: 25px;
+    --g-pos-top-label: 10px;
+    --g-pos-left-label: 10px;
+    --g-font-topbar: --g-font-1;
+    --g-font-family_btn: Josefin Sans;
+    --g-font-weight-btn: 600;
+    --g-font-size-btn: 14px;
+    --g-font-spacing-btn: 0em;
+    --g-font-radius-btn: 0px;
+    --g-font-border-bottom-btn: 2px;
+    --g-text-transform-btn: uppercase;
+    --g-padding-ver-btn: 11px;
+    --g-padding-hoz-btn: 30px;
+    --g-height-border-btnline: 2px;
+    --g-h1-font-size: 36px;
+    --g-h1-font-weight: 400;
+    --g-h1-font-spacing: em;
+    --g-h1-font-lineheight: ;
+    --g-h2-font-size: 32px;
+    --g-h2-font-weight: 400;
+    --g-h2-font-spacing: em;
+    --g-h2-font-lineheight: ;
+    --g-h3-font-size: 28px;
+    --g-h3-font-weight: 400;
+    --g-h3-font-spacing: em;
+    --g-h3-font-lineheight: ;
+    --g-h4-font-size: 22px;
+    --g-h4-font-weight: 400;
+    --g-h4-font-spacing: em;
+    --g-h4-font-lineheight: ;
+    --g-h5-font-size: 20px;
+    --g-h5-font-weight: 500;
+    --g-h5-font-spacing: em;
+    --g-h5-font-lineheight: ;
+    --g-h6-font-size: 18px;
+    --g-h6-font-weight: 600;
+    --g-h6-font-spacing: em;
+    --g-h6-font-lineheight: ;
+    --g-slide-font-size: 40px;
+    --g-slide-font-weight: 400;
+    --g-slide-font-spacing: em;
+    --g-slide-font-lineheight: ;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}

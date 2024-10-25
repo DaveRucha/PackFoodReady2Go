@@ -1,0 +1,89 @@
+﻿@model List<PackFoodReady2Go.Core.FooterInfo>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="~/css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/animate.css">
+
+	<link rel="stylesheet" href="~/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="~/css/magnific-popup.css">
+
+	<link rel="stylesheet" href="~/css/aos.css">
+
+	<link rel="stylesheet" href="~/css/ionicons.min.css">
+
+	<link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="~/css/jquery.timepicker.css">
+
+
+	<link rel="stylesheet" href="~/css/flaticon.css">
+	<link rel="stylesheet" href="~/css/icomoon.css">
+	<link rel="stylesheet" href="~/css/style.css">
+
+	<style>
+		/* Styles for the outer row and column */
+		.row-main {
+			margin-top: 20px; /* Example margin */
+			margin-bottom: 20px; /* Example margin */
+			margin-left: 10%;
+			margin-right: 10%;
+		}
+
+		.col {
+			padding: 0; /* Remove default padding */
+		}
+
+		.col-inner {
+			background-color: #f0f0f0; /* Example background color */
+			padding: 20px; /* Example padding */
+			border-radius: 5px; /* Example border radius */
+		}
+
+		/* Styles for the headings */
+		.uppercase {
+			text-transform: uppercase; /* Convert text to uppercase */
+			color: #333; /* Example text color */
+			margin-bottom: 10px; /* Example margin */
+		}
+
+		h2 {
+			font-size: 24px; /* Example font size */
+		}
+
+		h5 {
+			font-size: 18px; /* Example font size */
+		}
+	</style>
+
+</head>
+<body class="goto-here">
+	<div class="hero-wrap hero-bread" style="background-image: url('@Url.Content("~/img/" + @ViewData["BgImage"])');">
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<p class="breadcrumbs"><span class="mr-2"><a asp-action="Index" asp-area="" asp-controller="Customer" style="font-size:15px;color:white;font-weight:700; text-shadow: 0 0 3px #0d491b, 0 0 5px #000000;">Home</a></span> <span style="font-size:15px;color:white;font-weight:700; text-shadow: 0 0 3px #0d491b, 0 0 5px #000000;">@Html.Raw(Model.FirstOrDefault().Terms_Title)</span></p>
+					<h1 class="mb-0 bread" style="color:white;font-weight:700; text-shadow: 0 0 3px #0d491b, 0 0 5px #000000;font-size:28px">@Html.Raw(Model.FirstOrDefault().Terms_Title)</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row row-main">
+		<div class="large-12 col">
+			<div class="col-inner">
+
+					<h2 class="uppercase">@Html.Raw(Model.FirstOrDefault().Terms_Title)</h2>
+					<h5 class="uppercase">@Html.Raw(Model.FirstOrDefault().Terms_Discription)</h5>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

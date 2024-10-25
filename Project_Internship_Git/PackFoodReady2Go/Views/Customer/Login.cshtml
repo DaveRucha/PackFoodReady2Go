@@ -1,0 +1,110 @@
+﻿@model PackFoodReady2Go.Core.Customer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Login Page</title>
+    <style>
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #45a049;
+            }
+
+        .text-danger {
+            color: red;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+            .signup-link a {
+                color: #007bff;
+                text-decoration: none;
+            }
+    </style>
+</head>
+
+<body class="abc" style="margin-top: 0;
+            padding: 0;
+            margin-bottom:30px;
+            background-color: #ffffff;
+            align-items: center;
+
+            justify-content: center;
+            height: 100vh;">
+
+    <hr />
+    <form asp-action="Login" method="post" style=" background-color: #f4f4f4;
+            padding: 50px;
+            margin-left:33%;
+margin-bottom:5%;
+margin-top:50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            box-sizing: border-box;">
+        <h2 style=" text-align: center;
+            color: #333;">
+            Login
+        </h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <a asp-action="ForgotPassword" asp-controller="Customer">Forget Password</a>
+        </div>
+        <div class="signup-link">
+            Not a member? <a asp-action="Register" asp-controller="Customer">Register now</a>
+        </div>
+     
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+
+</html>
